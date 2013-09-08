@@ -100,10 +100,22 @@ public class ClienteGPC {
 
      public static void checkSumParaPedidoDeClientesConectados() throws IOException {     
         output.writeByte(3);
+        
         output.writeByte(0);
         output.writeByte(0);
+        
         output.writeByte(0);
         output.writeByte(3);
+     }
+     
+     public static void checkSumParaDesconectar() throws IOException {     
+        output.writeByte(160);
+        
+        output.writeByte(0);
+        output.writeByte(0);
+        
+        output.writeByte(0);
+        output.writeByte(160);
      }
      
     public static void conecta(){
@@ -154,6 +166,15 @@ public class ClienteGPC {
     public static void servicoRequisitarApelido(int idCliente) {
         try {
             checkSumParaListaDeApelidos(idCliente);           
+        } catch (IOException ex) {
+            System.out.println("Não foi possível descobrir os apelidos");
+            System.out.println(ex);
+        }
+    }
+    
+    public static void servicoDesconectar() {
+        try {
+            checkSumParaDesconectar();           
         } catch (IOException ex) {
             System.out.println("Não foi possível descobrir os apelidos");
             System.out.println(ex);
