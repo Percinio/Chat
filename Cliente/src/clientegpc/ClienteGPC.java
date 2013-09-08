@@ -71,34 +71,32 @@ public class ClienteGPC {
         return checkSum;
     }
   
- /*   public static int checkSumParaInts(int servico, int[] dados) throws IOException {
+    public static int checkSumParaListaDeApelidos(int cliente) throws IOException {
        
         int checkSum=0;
         int tamanhoDados;
         int dadosProcessados = 0;
         
-        tamanhoDados = dados.length * 2;
+        String strNum = String.valueOf(cliente);  
+        tamanhoDados = (strNum.length() * 4);
         
-        output.writeByte(servico);
-        System.out.println(servico);
+        output.writeByte(4);
         output.writeByte(tamanhoDados);
-        System.out.println(tamanhoDados);
-        for (int count =0 ; count < dados.length; count++) {
-            dadosProcessados += dados[count];
-            output.writeChar(dados[count]);
-            System.out.println("Dado" + count + " :" + dados[count]);
+       
+        for (int count = 0; count < strNum.length(); count++) {
+            dadosProcessados += Integer.parseInt(String.valueOf(strNum.charAt(count)));
+            output.writeInt(Integer.parseInt(String.valueOf(strNum.charAt(count))));
             //System.out.println("Dado" + count + " :" + Integer.toHexString(dados.charAt(count)));
         }
         
-        checkSum += servico;
+        checkSum += 4;
         checkSum += tamanhoDados;
         checkSum += dadosProcessados;
         
         output.writeByte(checkSum);
-        System.out.println(Integer.toHexString(checkSum));  
 
         return checkSum;
-    }*/
+    }
 
      public static void checkSumParaPedidoDeClientesConectados() throws IOException {     
         output.writeByte(3);
@@ -149,6 +147,15 @@ public class ClienteGPC {
             
         } catch (IOException ex) {
             System.out.println("Não foi possível descobrir os clientes conectados");
+            System.out.println(ex);
+        }
+    }
+    
+    public static void servicoRequisitarApelido(int idCliente) {
+        try {
+            checkSumParaListaDeApelidos(idCliente);           
+        } catch (IOException ex) {
+            System.out.println("Não foi possível descobrir os apelidos");
             System.out.println(ex);
         }
     }
