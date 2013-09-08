@@ -52,6 +52,7 @@ public class ClienteGPC {
             output = new DataOutputStream(socketCliente.getOutputStream());     
             fechaTelaDeAbertura();
             abreTelaPrincipal();
+            System.out.println(apelido);
         }catch(IOException e){  
             System.out.println(e);
             System.out.println("Algum problema ocorreu ao criar ou enviar dados pelo socket.");        
