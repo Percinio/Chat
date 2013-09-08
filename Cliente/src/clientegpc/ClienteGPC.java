@@ -38,7 +38,7 @@ public class ClienteGPC {
         telaPrincipal.setVisible(false);
     }
     
-    public static void main(String[] args) {
+    public static void main(String[] args) { 
        abreTelaDeAbertura();
     }
     
@@ -70,8 +70,44 @@ public class ClienteGPC {
 
         return checkSum;
     }
+  
+ /*   public static int checkSumParaInts(int servico, int[] dados) throws IOException {
+       
+        int checkSum=0;
+        int tamanhoDados;
+        int dadosProcessados = 0;
+        
+        tamanhoDados = dados.length * 2;
+        
+        output.writeByte(servico);
+        System.out.println(servico);
+        output.writeByte(tamanhoDados);
+        System.out.println(tamanhoDados);
+        for (int count =0 ; count < dados.length; count++) {
+            dadosProcessados += dados[count];
+            output.writeChar(dados[count]);
+            System.out.println("Dado" + count + " :" + dados[count]);
+            //System.out.println("Dado" + count + " :" + Integer.toHexString(dados.charAt(count)));
+        }
+        
+        checkSum += servico;
+        checkSum += tamanhoDados;
+        checkSum += dadosProcessados;
+        
+        output.writeByte(checkSum);
+        System.out.println(Integer.toHexString(checkSum));  
 
-    
+        return checkSum;
+    }*/
+
+     public static void checkSumParaPedidoDeClientesConectados() throws IOException {     
+        output.writeByte(3);
+        output.writeByte(0);
+        output.writeByte(0);
+        output.writeByte(0);
+        output.writeByte(3);
+     }
+     
     public static void conecta(){
         try{                
             socketCliente = new Socket(endereco,Integer.parseInt(porta));
@@ -80,6 +116,10 @@ public class ClienteGPC {
             fechaTelaDeAbertura();
             abreTelaPrincipal();
             servicoOla(apelido);
+     
+            GerenteCliente gerente = new GerenteCliente();
+            Thread threadGerente = new Thread(gerente);
+            threadGerente.start();
         }catch(IOException e){  
             System.out.println(e);
             System.out.println("Algum problema ocorreu ao criar ou enviar dados pelo socket.");        
@@ -99,6 +139,17 @@ public class ClienteGPC {
         try {
             checkSum(2, dadosApelido);
         } catch (IOException ex) {
+        }
+    }
+    
+    
+    public static void servicoClientesConectados() {
+        try {
+            checkSumParaPedidoDeClientesConectados();
+            
+        } catch (IOException ex) {
+            System.out.println("Não foi possível descobrir os clientes conectados");
+            System.out.println(ex);
         }
     }
     
