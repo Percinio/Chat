@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package visualisacao;
+package visualizacao;
 
 import clientegpc.ClienteGPC;
 
@@ -16,6 +16,7 @@ public class TelaAbertura extends javax.swing.JFrame {
      * Creates new form TelaAbertura
      */
     public TelaAbertura() {
+        super("Dados de Conexão");
         initComponents();
     }
 

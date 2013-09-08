@@ -111,12 +111,16 @@ public class Server extends JFrame {
     //during the chat conversation
     private void whileChatting() throws IOException {
         String message = "You are now connected!";
+        int servico;
+        int numDados;
+        String messagem;
+        int checksum; 
         sendMessage(message);
         ableToType(true);
         do {
             //have a conversation
             try {
-                message = (String) input.readObject();
+                message = (String) input.readObject();                
                 showMessage("\n" + message);
             } catch (ClassNotFoundException cnfe) {
                 showMessage("\n idk wtf that user sent!");

@@ -4,18 +4,11 @@
  */
 package clientegpc;
 
-import visualisacao.TelaAbertura;
+import visualizacao.*;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.IOException;  
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
-import java.io.PrintStream;  
+import java.io.IOException;   
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import visualisacao.TelaPrincipal;
 
 /**
  *
@@ -99,6 +92,13 @@ public class ClienteGPC {
         } catch (IOException ex) {
             System.out.println("Não foi possível mandar ola");
             System.out.println(ex);
+        }
+    }
+    
+     public static void servicoTrocaApelido(String dadosApelido)throws IOException {
+        try {
+            checkSum(2, dadosApelido);
+        } catch (IOException ex) {
         }
     }
     
